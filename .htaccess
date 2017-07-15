@@ -1,0 +1,15 @@
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^vendor">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^composer">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^bower">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^lib">
+  Require all denied
+</FilesMatch>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Check Your Math.tan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-blue.min.css">
+  <style>
+    .is-hide {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    @-webkit-keyframes fadeIn {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="mdl-layout__container">
+    <div class="mdl-layout mdl-js-layout">
+      <main class="mdl-layout__content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--2-offset-desktop">
+            <h1 class="mdl-typography--font-light mdl-typography--display-1-color-contrast mdl-typography--text-center">
+              Check Your Math.tan
+            </h1>
+            <hr>
+            <form name="profileForm" class="mdl-typography--font-light mdl-typography--text-center">
+              <div>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="Run">
+              </div>
+            </form>
+            <div id="result" class="is-hide" style="overflow: scroll;">
+              <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin: 20px auto;">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">User Agent</td>
+                    <td id="userAgent" class="mdl-data-table__cell--non-numeric">{{userAgent}}</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Math.tan</td>
+                    <td id="mathTan" class="mdl-data-table__cell--non-numeric">{{mathTan}}</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">OS</td>
+                    <td id="os" class="mdl-data-table__cell--non-numeric">{{os}}</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">OS (estimate)</td>
+                    <td id="estimateOS" class="mdl-data-table__cell--non-numeric">{{estimate os}}</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Browser</td>
+                    <td id="browser" class="mdl-data-table__cell--non-numeric">{{browser}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="lib/ua-parser.min.js"></script>
+  <script src="js/detectOS.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script>
+  (function () {
+    var mathTan = Math.tan(-1e300)
+    var form = document.forms.namedItem('profileForm')
+    form.addEventListener('submit', function(ev) {
+      var parser = new UAParser()
+      var result = parser.getResult()
+      document.getElementById('userAgent').textContent = window.navigator.userAgent
+      document.getElementById('mathTan').textContent = mathTan
+      document.getElementById('browser').textContent = JSON.stringify(result.browser)
+      document.getElementById('os').textContent = JSON.stringify(result.os)
+      document.getElementById('estimateOS').textContent = detectOS()
+      document.forms.namedItem('profileForm').style.display = 'none'
+      document.getElementById('result').style.animation = 'fadeIn 2s ease 0s 1 normal'
+      document.getElementById('result').style['-webkit-animation'] = 'fadeIn 2s ease 0s 1 normal'
+      document.getElementById('result').style.display = 'block'
+
+      ev.preventDefault()
+    })
+  }())
+  </script>
+</body>
+
+</html>

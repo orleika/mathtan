@@ -1,0 +1,9 @@
+{
+  "name": "mathtan",
+  "authors": [
+    "orleika <admin@orleika.io>"
+  ],
+  "dependencies": {
+    "ua-parser-js": "^0.7.12"
+  }
+}
